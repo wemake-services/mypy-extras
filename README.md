@@ -41,7 +41,7 @@ We provide a special type to get named attributes of other types, like so:
 
 ```python
 from typing_extensions import Literal  # or typing on python3.8+
-from mypy_extras.types import AttrOf
+from mypy_extras import AttrOf
 
 class User(object):
     def auth(self, username: str, password: str) -> bool:

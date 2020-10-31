@@ -14,7 +14,7 @@ class AttrOf(Generic[_ObjectType, _AttrQueryType]):
     .. code:: python
 
       >>> from typing_extensions import Literal
-      >>> from mypy_extras.types import AttrOf
+      >>> from mypy_extras import AttrOf
 
       >>> def example() -> AttrOf[str, Literal['split']]:
       ...     return str.split
