@@ -8,20 +8,20 @@ from mypy_extras.plugin.features import attr_of, ensure_attr
 
 #: Used for `get_type_analyze_hook`:
 _TypeAnalyzeHook = Callable[
-    [Plugin],
+    [Plugin, str],
     Callable[[AnalyzeTypeContext], MypyType],
 ]
 
 #: Used for `get_function_hook`:
 _FunctionAnalyzeHook = Callable[
-    [Plugin],
+    [Plugin, str],
     Callable[[FunctionContext], MypyType],
 ]
 
 
 @final
 class _MypyExtrasPlugin(Plugin):
-    """"""
+    """Dispatches ``mypy`` API calls to different sub-plugins."""
 
     _type_analyze: Mapping[str, _TypeAnalyzeHook] = {
         'mypy_extras.attr_of.AttrOf': attr_of.AttrOf,
@@ -37,7 +37,7 @@ class _MypyExtrasPlugin(Plugin):
     ) -> Optional[Callable[[AnalyzeTypeContext], MypyType]]:
         hook = self._type_analyze.get(fullname)
         if hook is not None:
-            return hook(self)
+            return hook(self, fullname)
         return None
 
     def get_function_hook(
@@ -46,7 +46,7 @@ class _MypyExtrasPlugin(Plugin):
     ) -> Optional[Callable[[FunctionContext], MypyType]]:
         hook = self._functions.get(fullname)
         if hook is not None:
-            return hook(self)
+            return hook(self, fullname)
         return None
 
 

@@ -1,0 +1,28 @@
+- case: ensure_attr_wrong_key
+  disable_cache: false
+  main: |
+    from mypy_extras import ensure_attr
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    reveal_type(ensure_attr(Test, 'y'))
+  out: |
+    main:7: error: Property "y" does not exist on type "main.Test"
+    main:7: note: Revealed type is 'Literal['y']'
+
+
+- case: ensure_attr_wrong_key_type
+  disable_cache: false
+  main: |
+    from mypy_extras import ensure_attr
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    reveal_type(ensure_attr(Test, 1))
+  out: |
+    main:7: error: Argument 2 to "ensure_attr" has incompatible type "int"; expected "str"
+    main:7: note: Revealed type is 'builtins.str'

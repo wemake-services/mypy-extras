@@ -56,6 +56,32 @@ reveal_type(get_callback(user))
 ```
 
 
+### ensure_attr
+
+We can ensure that some `str` attribute exists on a object:
+
+```python
+from mypy_extras import ensure_attr
+
+
+class User(object):
+    policy = 'update'
+
+
+reveal_type(ensure_attr(User, 'policy'))  # Revealed type is 'Literal['policy']'
+reveal_type(ensure_attr(User, 'missing'))  # Error: attribute "missing" does not exist on type "User"
+```
+
+It is useful when we do any manipulations with objects based on a string field:
+
+```python
+DEFAULT_POLICY_FIELD: Final = ensure_attr(User, 'policy')  # typesafe
+# vs
+DEFAULT_POLICY_FIELD: Final = 'policy'  
+# User can rename the field, and this will blow now!
+```
+
+
 ## License
 
 [MIT](https://github.com/wemake.services/mypy-extras/blob/master/LICENSE)

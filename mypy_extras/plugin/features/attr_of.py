@@ -1,11 +1,9 @@
-from typing import Optional
-
 from mypy.nodes import Decorator, FuncBase, Node, Var
 from mypy.plugin import AnalyzeTypeContext, Plugin
 from mypy.typeops import bind_self
-from mypy.types import AnyType, FunctionLike, Instance, LiteralType
+from mypy.types import AnyType, FunctionLike, LiteralType
 from mypy.types import Type as MypyType
-from mypy.types import TypeOfAny, TypeType
+from mypy.types import TypeOfAny
 from typing_extensions import final
 
 from mypy_extras.plugin.typeops.definitions import get_definition
@@ -22,9 +20,10 @@ class AttrOf(object):
     We fallback to ``Any`` if anything goes wrong.
     """
 
-    def __init__(self, plugin: Plugin) -> None:
+    def __init__(self, plugin: Plugin, fullname: str) -> None:
         """We don't actually need anything from ``Plugin`` type here."""
         self._plugin = plugin
+        self._fullname = fullname
         self._fallback = AnyType(TypeOfAny.from_error)
 
     def __call__(self, ctx: AnalyzeTypeContext) -> MypyType:
@@ -43,7 +42,9 @@ class AttrOf(object):
         if node is None:
             return self._fallback
 
-        return ctx.api.analyze_type(self._process_node_type(node))
+        return ctx.api.analyze_type(
+            self._process_node_type(node),
+        )
 
     def _process_node_type(self, node: Node) -> MypyType:
         if isinstance(node, Decorator):

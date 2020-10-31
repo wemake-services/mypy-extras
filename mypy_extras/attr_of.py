@@ -51,13 +51,15 @@ def ensure_attr(
       >>> class User(object):
       ...     email: str
 
-      >>> assert user_props = {  # typechecks!
+      >>> assert {  # typechecks!
       ...     ensure_attr(User, 'email'): 'mail@example.com',
       ... } == {'email': 'mail@example.com'}
 
-      >>> assert user_props = {  # fails!
-      ...     ensure_attr(User, 'email_address'): 'mail@example.com',
-      ... } == {'email_address': 'mail@example.com'}
+      >>> assert {  # typecheck fails!
+      ...     ensure_attr(User, 'address'): 'Some street 12',
+      ... } == {'address': 'Some street 12'}
+      >>> # error: Property "address" does not exist on type "User"
 
+    Does nothing in runtime.
     """
-    return attribute  # does nothing in runtime
+    return attribute

@@ -9,7 +9,7 @@
     class Test(object):
         x: int
 
-    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']?'
+    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']'
 
 
 - case: ensure_attr_method
@@ -22,7 +22,7 @@
         def x(self, a: int) -> str:
             ...
 
-    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']?'
+    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']'
 
 
 - case: ensure_attr_classmethod
@@ -36,7 +36,7 @@
         def x(cls, a: int) -> str:
             ...
 
-    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']?'
+    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']'
 
 
 - case: ensure_attr_staticmethod
@@ -50,4 +50,19 @@
         def x(a: int) -> str:
             ...
 
-    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']?'
+    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']'
+
+
+- case: ensure_attr_callback
+  disable_cache: false
+  main: |
+    from mypy_extras import ensure_attr
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    def test(arg: Literal['x']):
+        ...
+
+    test(ensure_attr(Test, 'x'))
