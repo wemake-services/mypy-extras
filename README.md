@@ -1,7 +1,7 @@
 # mypy-extras
 
-[![Build Status](https://travis-ci.com/wemake.services/mypy-extras.svg?branch=master)](https://travis-ci.com/wemake.services/mypy-extras)
-[![Coverage](https://coveralls.io/repos/github/wemake.services/mypy-extras/badge.svg?branch=master)](https://coveralls.io/github/wemake.services/mypy-extras?branch=master)
+[![test](https://github.com/wemake-services/mypy-extras/workflows/test/badge.svg?branch=master&event=push)](https://github.com/wemake-services/mypy-extras/actions?query=workflow%3Atest)
+[![codecov](https://codecov.io/gh/wemake-server/mypy-extras/branch/master/graph/badge.svg)](https://codecov.io/gh/wemake-server/mypy-extras)
 [![Python Version](https://img.shields.io/pypi/pyversions/mypy-extras.svg)](https://pypi.org/project/mypy-extras/)
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 

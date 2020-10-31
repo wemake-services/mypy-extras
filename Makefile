@@ -2,7 +2,7 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: lint
 lint:
-	poetry run mypy mypy_extras tests/**/*.py
+	poetry run mypy mypy_extras tests/*.py
 	poetry run flake8 .
 	poetry run doc8 -q docs
 
