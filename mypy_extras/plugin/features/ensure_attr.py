@@ -1,8 +1,8 @@
 from typing import ClassVar
 
+from mypy.nodes import NameExpr
 from mypy.plugin import FunctionContext, Plugin
 from mypy.types import Type as MypyType
-from mypy.nodes import NameExpr
 from typing_extensions import final
 
 
@@ -29,7 +29,8 @@ class EnsureAttr(object):
         assert ctx.args[0][0].fullname
         defn = self._plugin.lookup_fully_qualified(ctx.args[0][0].fullname)
 
-        assert defn and defn.node
+        assert defn
+        assert defn.node
         if defn.node.names.get(literal.value) is None:  # type: ignore
             msg = self._error_text.format(literal.value, defn.fullname)
             ctx.api.fail(msg, ctx.context)
