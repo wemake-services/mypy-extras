@@ -11,6 +11,19 @@
     reveal_type(test)  # N: Revealed type is 'Any'
 
 
+- case: attr_of_attr_literal_wrong_subtype
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    test: AttrOf[Test, Literal[1]]  # E: The second argument must be a string literal
+    reveal_type(test)  # N: Revealed type is 'Any'
+
+
 - case: attr_of_attr_wrong_key_type
   disable_cache: false
   main: |
