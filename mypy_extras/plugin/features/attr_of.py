@@ -8,6 +8,8 @@ from mypy.types import Type as MypyType
 from mypy.types import TypeOfAny, TypeType
 from typing_extensions import final
 
+from mypy_extras.plugin.typeops.definitions import get_definition
+
 
 @final
 class AttrOf(object):
@@ -37,23 +39,11 @@ class AttrOf(object):
             )
             return self._fallback
 
-        node = self._extract_node(typ, arg.value)
+        node = get_definition(typ, arg.value)
         if node is None:
             return self._fallback
 
         return ctx.api.analyze_type(self._process_node_type(node))
-
-    def _extract_node(self, typ: MypyType, arg: str) -> Optional[Node]:
-        if isinstance(typ, Instance):  # TODO: support Union types
-            sym = typ.type.names.get(arg)
-            return sym.node if sym is not None else None
-        elif isinstance(typ, TypeType):
-            if not isinstance(typ.item, Instance):
-                return None  # it can be type var or union or etc
-
-            sym = typ.item.type.names.get(arg)  # TODO: support Union types
-            return sym.node if sym is not None else None
-        return None
 
     def _process_node_type(self, node: Node) -> MypyType:
         if isinstance(node, Decorator):

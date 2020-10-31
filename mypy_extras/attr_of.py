@@ -1,4 +1,4 @@
-from typing import Generic, TypeVar
+from typing import Generic, Type, TypeVar
 
 from typing_extensions import final
 
@@ -31,4 +31,33 @@ class AttrOf(Generic[_ObjectType, _AttrQueryType]):
 
     We also do require ``mypy_extras`` plugin to be enabled in ``mypy``.
 
+    Does not exist in runtime.
     """
+
+
+def ensure_attr(
+    container: Type[_ObjectType],
+    attribute: str,
+) -> str:
+    """
+    Type to ensure that a string attribute belongs to a given type.
+
+    This is how it works:
+
+    .. code:: python
+
+      >>> from mypy_extras import ensure_attr
+
+      >>> class User(object):
+      ...     email: str
+
+      >>> assert user_props = {  # typechecks!
+      ...     ensure_attr(User, 'email'): 'mail@example.com',
+      ... } == {'email': 'mail@example.com'}
+
+      >>> assert user_props = {  # fails!
+      ...     ensure_attr(User, 'email_address'): 'mail@example.com',
+      ... } == {'email_address': 'mail@example.com'}
+
+    """
+    return attribute  # does nothing in runtime
