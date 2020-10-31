@@ -1,0 +1,83 @@
+- case: attr_of_attr
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    test: AttrOf[str, Literal['split']]
+    reveal_type(test)  # N: Revealed type is 'def (sep: Union[builtins.str, None] =, maxsplit: builtins.int =) -> builtins.list[builtins.str]'
+
+
+- case: attr_of_attr
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    test: AttrOf[Test, Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'builtins.int'
+
+
+- case: attr_of_method
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        def x(self, a: int) -> str:
+            ...
+
+    test: AttrOf[Test, Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'def (a: builtins.int) -> builtins.str'
+
+
+- case: attr_of_classmethod
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        @classmethod
+        def x(cls, a: int) -> str:
+            ...
+
+    test: AttrOf[Test, Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'def (a: builtins.int) -> builtins.str'
+
+
+- case: attr_of_staticmethod
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        @staticmethod
+        def x(a: int) -> str:
+            ...
+
+    test: AttrOf[Test, Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'def (a: builtins.int) -> builtins.str'
+
+
+- case: attr_of_callback
+  disable_cache: false
+  main: |
+    from typing_extensions import Literal
+    from mypy_extras import AttrOf
+
+
+    class User(object):
+        def auth(self, username: str, password: str) -> bool:
+            return False  # Just an example
+
+    def get_callback(user: User) -> AttrOf[User, Literal['auth']]:
+        return user.auth
+
+    x: User
+    reveal_type(get_callback(x))  # N: Revealed type is 'def (username: builtins.str, password: builtins.str) -> builtins.bool'

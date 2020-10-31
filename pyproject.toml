@@ -1,0 +1,52 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.nitpick]
+style = "https://raw.githubusercontent.com/wemake-services/wemake-python-styleguide/master/styles/nitpick-style-wemake.toml"
+
+
+[tool.poetry]
+name = "mypy-extras"
+description = "A collection of extra types and features for mypy"
+version = "0.1.0"
+license = "MIT"
+
+authors = []
+
+readme = "README.md"
+
+repository = "https://github.com/wemake.services/mypy-extras"
+
+keywords = []
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6,<3.9"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.790"
+
+wemake-python-styleguide = "^0.14"
+flake8-pytest-style = "^1.3"
+nitpick = "^0.23"
+
+safety = "^1.9"
+
+pytest = "^6.1"
+pytest-cov = "^2.10"
+pytest-randomly = "^3.4"
+pytest-mypy-plugins = "^1.6"
+
+sphinx = "^3.1"
+sphinx-autodoc-typehints = "^1.11"
+doc8 = "^0.8"
+m2r2 = "^0.2"
+tomlkit = "^0.7"

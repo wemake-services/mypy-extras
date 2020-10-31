@@ -1,0 +1,36 @@
+- case: attr_of_attr_missing
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    test: AttrOf[Test, Literal['y']]
+    reveal_type(test)  # N: Revealed type is 'Any'
+
+
+- case: attr_of_attr_wrong_key_type
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Test(object):
+        x: int
+
+    test: AttrOf[Test, 'y']
+  out: |
+    main:7: error: Name 'y' is not defined
+    main:7: error: The second argument must be a string literal
+
+
+- case: attr_of_attr_wrong_instance
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    test: AttrOf[int, Literal['y']]
+    reveal_type(test)  # N: Revealed type is 'Any'

@@ -1,0 +1,26 @@
+- case: attr_of_type
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+    from typing import Type
+
+    class Test(object):
+        x = 1
+
+    test: AttrOf[Type[Test], Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'builtins.int'
+
+
+- case: attr_of_type_classvar
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+    from typing import Type, ClassVar
+
+    class Test(object):
+        x: ClassVar[int] = 1
+
+    test: AttrOf[Type[Test], Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'builtins.int'
