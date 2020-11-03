@@ -12,6 +12,21 @@
     reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']'
 
 
+- case: ensure_attr_super_attr
+  disable_cache: false
+  main: |
+    from mypy_extras import ensure_attr
+    from typing_extensions import Literal
+
+    class Base(object):
+        x: int
+
+    class Test(Base):
+        ...
+
+    reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is 'Literal['x']'
+
+
 - case: ensure_attr_method
   disable_cache: false
   main: |

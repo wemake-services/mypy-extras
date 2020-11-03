@@ -31,7 +31,7 @@ class EnsureAttr(object):
 
         assert defn
         assert defn.node
-        if defn.node.names.get(literal.value) is None:  # type: ignore
+        if defn.node.get(literal.value) is None:  # type: ignore
             msg = self._error_text.format(literal.value, defn.fullname)
             ctx.api.fail(msg, ctx.context)
         return literal
