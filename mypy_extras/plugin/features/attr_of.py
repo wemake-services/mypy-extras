@@ -1,10 +1,10 @@
+from mypy.expandtype import expand_type_by_instance
 from mypy.nodes import Decorator, FuncBase, Node, Var
 from mypy.plugin import AnalyzeTypeContext, Plugin
 from mypy.typeops import bind_self
-from mypy.types import AnyType, FunctionLike, LiteralType
+from mypy.types import AnyType, FunctionLike, Instance, LiteralType
 from mypy.types import Type as MypyType
-from mypy.types import TypeOfAny, Instance
-from mypy.expandtype import expand_type_by_instance
+from mypy.types import TypeOfAny
 from typing_extensions import final
 
 from mypy_extras.plugin.typeops.definitions import get_definition
