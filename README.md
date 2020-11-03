@@ -2,7 +2,7 @@
 
 [![wemake.services](https://img.shields.io/badge/%20-wemake.services-green.svg?label=%20&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC%2FxhBQAAAAFzUkdCAK7OHOkAAAAbUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP%2F%2F%2F5TvxDIAAAAIdFJOUwAjRA8xXANAL%2Bv0SAAAADNJREFUGNNjYCAIOJjRBdBFWMkVQeGzcHAwksJnAPPZGOGAASzPzAEHEGVsLExQwE7YswCb7AFZSF3bbAAAAABJRU5ErkJggg%3D%3D)](https://wemake.services)
 [![test](https://github.com/wemake-services/mypy-extras/workflows/test/badge.svg?branch=master&event=push)](https://github.com/wemake-services/mypy-extras/actions?query=workflow%3Atest)
-[![codecov](https://codecov.io/gh/wemake-server/mypy-extras/branch/master/graph/badge.svg)](https://codecov.io/gh/wemake-server/mypy-extras)
+[![codecov](https://codecov.io/gh/wemake-services/mypy-extras/branch/master/graph/badge.svg)](https://codecov.io/gh/wemake-services/mypy-extras)
 [![Python Version](https://img.shields.io/pypi/pyversions/mypy-extras.svg)](https://pypi.org/project/mypy-extras/)
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 
