@@ -21,6 +21,22 @@
     reveal_type(test)  # N: Revealed type is 'builtins.int'
 
 
+- case: attr_of_super_attr
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+
+    class Base(object):
+        x: int
+
+    class Test(Base):
+        ...
+
+    test: AttrOf[Test, Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'builtins.int'
+
+
 - case: attr_of_method
   disable_cache: false
   main: |
@@ -81,3 +97,42 @@
 
     x: User
     reveal_type(get_callback(x))  # N: Revealed type is 'def (username: builtins.str, password: builtins.str) -> builtins.bool'
+
+
+- case: attr_of_generic_callback
+  disable_cache: false
+  main: |
+    from typing import Generic, TypeVar
+    from typing_extensions import Literal
+    from mypy_extras import AttrOf
+
+    T = TypeVar('T')
+
+    class User(Generic[T]):
+        auth: T
+
+    def get_callback(user: User[T]) -> AttrOf[User[T], Literal['auth']]:
+        return user.auth
+
+    x: User[int]
+    y: User[str]
+    reveal_type(get_callback(x))  # N: Revealed type is 'builtins.int*'
+    reveal_type(get_callback(y))  # N: Revealed type is 'builtins.str*'
+
+
+- case: attr_of_generic_attr
+  disable_cache: false
+  main: |
+    from typing import Generic, TypeVar
+    from typing_extensions import Literal
+    from mypy_extras import AttrOf
+
+    T = TypeVar('T')
+
+    class User(Generic[T]):
+        auth: T
+
+    x: AttrOf[User[int], Literal['auth']]
+    y: AttrOf[User[str], Literal['auth']]
+    reveal_type(x)  # N: Revealed type is 'builtins.int*'
+    reveal_type(y)  # N: Revealed type is 'builtins.str*'

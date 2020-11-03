@@ -24,3 +24,20 @@
 
     test: AttrOf[Type[Test], Literal['x']]
     reveal_type(test)  # N: Revealed type is 'builtins.int'
+
+
+- case: attr_of_super_type
+  disable_cache: false
+  main: |
+    from mypy_extras import AttrOf
+    from typing_extensions import Literal
+    from typing import Type
+
+    class Base(object):
+        x = 1
+
+    class Test(Base):
+        ...
+
+    test: AttrOf[Type[Test], Literal['x']]
+    reveal_type(test)  # N: Revealed type is 'builtins.int'

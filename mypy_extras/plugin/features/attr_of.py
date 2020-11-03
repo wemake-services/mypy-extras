@@ -3,7 +3,8 @@ from mypy.plugin import AnalyzeTypeContext, Plugin
 from mypy.typeops import bind_self
 from mypy.types import AnyType, FunctionLike, LiteralType
 from mypy.types import Type as MypyType
-from mypy.types import TypeOfAny
+from mypy.types import TypeOfAny, Instance
+from mypy.expandtype import expand_type_by_instance
 from typing_extensions import final
 
 from mypy_extras.plugin.typeops.definitions import get_definition
@@ -42,11 +43,13 @@ class AttrOf(object):
         if node is None:
             return self._fallback
 
-        return ctx.api.analyze_type(
-            self._process_node_type(node),
+        return self._process_type(
+            self._process_class_node(node),
+            typ,
+            ctx,
         )
 
-    def _process_node_type(self, node: Node) -> MypyType:
+    def _process_class_node(self, node: Node) -> MypyType:
         if isinstance(node, Decorator):
             if not node.func.is_static:
                 assert isinstance(node.func.type, FunctionLike)
@@ -64,3 +67,13 @@ class AttrOf(object):
         assert isinstance(node, Var)
         assert node.type
         return node.type
+
+    def _process_type(
+        self,
+        template: MypyType,
+        original: MypyType,
+        ctx: AnalyzeTypeContext,
+    ) -> MypyType:
+        if isinstance(original, Instance):
+            template = expand_type_by_instance(template, original)
+        return ctx.api.analyze_type(template)

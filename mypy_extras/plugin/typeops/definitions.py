@@ -16,7 +16,7 @@ def get_definition(typ: MypyType, arg: str) -> Optional[Node]:
 
 
 def _get_defition_instance(typ: Instance, arg: str) -> Optional[Node]:
-    sym = typ.type.names.get(arg)
+    sym = typ.type.get(arg)
     return sym.node if sym is not None else None
 
 
@@ -24,5 +24,5 @@ def _get_defition_type(typ: TypeType, arg: str) -> Optional[Node]:
     if not isinstance(typ.item, Instance):
         return None  # it can be type var or union or etc
 
-    sym = typ.item.type.names.get(arg)  # TODO: support Union types
+    sym = typ.item.type.get(arg)  # TODO: support Union types
     return sym.node if sym is not None else None
