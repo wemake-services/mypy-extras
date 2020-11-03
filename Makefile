@@ -8,7 +8,7 @@ lint:
 
 .PHONY: unit
 unit:
-	poetry run pytest
+	poetry run pytest mypy_extras
 
 .PHONY: package
 package:
