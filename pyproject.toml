@@ -34,7 +34,7 @@ python = ">=3.6,<3.9"
 [tool.poetry.dev-dependencies]
 mypy = "^0.800"
 
-wemake-python-styleguide = "^0.14"
+wemake-python-styleguide = "^0.15"
 flake8-pytest-style = "^1.3"
 nitpick = "^0.23"
 
@@ -45,7 +45,7 @@ pytest-cov = "^2.11"
 pytest-randomly = "^3.4"
 pytest-mypy-plugins = "^1.6"
 
-sphinx = "^3.4"
+sphinx = "^3.5"
 sphinx-autodoc-typehints = "^1.11"
 doc8 = "^0.8"
 m2r2 = "^0.2"
