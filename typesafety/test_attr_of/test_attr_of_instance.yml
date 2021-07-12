@@ -117,7 +117,7 @@
     x: User[int]
     y: User[str]
     reveal_type(get_callback(x))  # N: Revealed type is "builtins.int*"
-    reveal_type(get_callback(y))  # N: Revealed type is 'builtins.str*'
+    reveal_type(get_callback(y))  # N: Revealed type is "builtins.str*"
 
 
 - case: attr_of_generic_attr
@@ -135,4 +135,4 @@
     x: AttrOf[User[int], Literal['auth']]
     y: AttrOf[User[str], Literal['auth']]
     reveal_type(x)  # N: Revealed type is "builtins.int*"
-    reveal_type(y)  # N: Revealed type is 'builtins.str*'
+    reveal_type(y)  # N: Revealed type is "builtins.str*"
