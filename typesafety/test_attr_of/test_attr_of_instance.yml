@@ -5,7 +5,7 @@
     from typing_extensions import Literal
 
     test: AttrOf[str, Literal['split']]
-    reveal_type(test)  # N: Revealed type is 'def (sep: Union[builtins.str, None] =, maxsplit: builtins.int =) -> builtins.list[builtins.str]'
+    reveal_type(test)  # N: Revealed type is "def (sep: Union[builtins.str, None] =, maxsplit: builtins.int =) -> builtins.list[builtins.str]"
 
 
 - case: attr_of_attr
@@ -18,7 +18,7 @@
         x: int
 
     test: AttrOf[Test, Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'builtins.int'
+    reveal_type(test)  # N: Revealed type is "builtins.int"
 
 
 - case: attr_of_super_attr
@@ -34,7 +34,7 @@
         ...
 
     test: AttrOf[Test, Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'builtins.int'
+    reveal_type(test)  # N: Revealed type is "builtins.int"
 
 
 - case: attr_of_method
@@ -48,7 +48,7 @@
             ...
 
     test: AttrOf[Test, Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'def (a: builtins.int) -> builtins.str'
+    reveal_type(test)  # N: Revealed type is "def (a: builtins.int) -> builtins.str"
 
 
 - case: attr_of_classmethod
@@ -63,7 +63,7 @@
             ...
 
     test: AttrOf[Test, Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'def (a: builtins.int) -> builtins.str'
+    reveal_type(test)  # N: Revealed type is "def (a: builtins.int) -> builtins.str"
 
 
 - case: attr_of_staticmethod
@@ -78,7 +78,7 @@
             ...
 
     test: AttrOf[Test, Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'def (a: builtins.int) -> builtins.str'
+    reveal_type(test)  # N: Revealed type is "def (a: builtins.int) -> builtins.str"
 
 
 - case: attr_of_callback
@@ -96,7 +96,7 @@
         return user.auth
 
     x: User
-    reveal_type(get_callback(x))  # N: Revealed type is 'def (username: builtins.str, password: builtins.str) -> builtins.bool'
+    reveal_type(get_callback(x))  # N: Revealed type is "def (username: builtins.str, password: builtins.str) -> builtins.bool"
 
 
 - case: attr_of_generic_callback
@@ -116,7 +116,7 @@
 
     x: User[int]
     y: User[str]
-    reveal_type(get_callback(x))  # N: Revealed type is 'builtins.int*'
+    reveal_type(get_callback(x))  # N: Revealed type is "builtins.int*"
     reveal_type(get_callback(y))  # N: Revealed type is 'builtins.str*'
 
 
@@ -134,5 +134,5 @@
 
     x: AttrOf[User[int], Literal['auth']]
     y: AttrOf[User[str], Literal['auth']]
-    reveal_type(x)  # N: Revealed type is 'builtins.int*'
+    reveal_type(x)  # N: Revealed type is "builtins.int*"
     reveal_type(y)  # N: Revealed type is 'builtins.str*'

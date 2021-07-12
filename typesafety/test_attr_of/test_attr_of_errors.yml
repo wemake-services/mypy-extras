@@ -8,7 +8,7 @@
         x: int
 
     test: AttrOf[Test, Literal['y']]
-    reveal_type(test)  # N: Revealed type is 'Any'
+    reveal_type(test)  # N: Revealed type is "Any"
 
 
 - case: attr_of_attr_literal_wrong_subtype
@@ -21,7 +21,7 @@
         x: int
 
     test: AttrOf[Test, Literal[1]]  # E: The second argument must be a string literal
-    reveal_type(test)  # N: Revealed type is 'Any'
+    reveal_type(test)  # N: Revealed type is "Any"
 
 
 - case: attr_of_attr_wrong_key_type
@@ -35,7 +35,7 @@
 
     test: AttrOf[Test, 'y']
   out: |
-    main:7: error: Name 'y' is not defined
+    main:7: error: Name "y" is not defined
     main:7: error: The second argument must be a string literal
 
 
@@ -46,4 +46,4 @@
     from typing_extensions import Literal
 
     test: AttrOf[int, Literal['y']]
-    reveal_type(test)  # N: Revealed type is 'Any'
+    reveal_type(test)  # N: Revealed type is "Any"

@@ -9,7 +9,7 @@
         x = 1
 
     test: AttrOf[Type[Test], Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'builtins.int'
+    reveal_type(test)  # N: Revealed type is "builtins.int"
 
 
 - case: attr_of_type_classvar
@@ -23,7 +23,7 @@
         x: ClassVar[int] = 1
 
     test: AttrOf[Type[Test], Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'builtins.int'
+    reveal_type(test)  # N: Revealed type is "builtins.int"
 
 
 - case: attr_of_super_type
@@ -40,4 +40,4 @@
         ...
 
     test: AttrOf[Type[Test], Literal['x']]
-    reveal_type(test)  # N: Revealed type is 'builtins.int'
+    reveal_type(test)  # N: Revealed type is "builtins.int"

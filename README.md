@@ -52,7 +52,7 @@ def get_callback(user: User) -> AttrOf[User, Literal['auth']]:
 
 user: User
 reveal_type(get_callback(user))
-# Revealed type is 'def (username: builtins.str, password: builtins.str) -> builtins.bool'
+# Revealed type is "def (username: builtins.str, password: builtins.str) -> builtins.bool"
 ```
 
 
