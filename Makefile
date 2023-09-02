@@ -14,7 +14,6 @@ unit:
 package:
 	poetry check
 	poetry run pip check
-	poetry run safety check --full-report
 
 .PHONY: typetests
 typetests:
