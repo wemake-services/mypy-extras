@@ -20,8 +20,11 @@
     class Test(object):
         x: int
 
-    test: AttrOf[Test, Literal[1]]  # E: The second argument must be a string literal
-    reveal_type(test)  # N: Revealed type is "Any"
+    test: AttrOf[Test, Literal[1]]
+    reveal_type(test)
+  out: |
+    main:7: error: The second argument must be a string literal  [misc]
+    main:8: note: Revealed type is "Any"
 
 
 - case: attr_of_attr_wrong_key_type
@@ -35,8 +38,8 @@
 
     test: AttrOf[Test, 'y']
   out: |
-    main:7: error: Name "y" is not defined
-    main:7: error: The second argument must be a string literal
+    main:7: error: The second argument must be a string literal  [misc]
+    main:7: error: Name "y" is not defined  [name-defined]
 
 
 - case: attr_of_attr_wrong_instance

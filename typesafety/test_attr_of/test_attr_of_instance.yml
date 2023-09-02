@@ -4,8 +4,8 @@
     from mypy_extras import AttrOf
     from typing_extensions import Literal
 
-    test: AttrOf[str, Literal['split']]
-    reveal_type(test)  # N: Revealed type is "def (sep: Union[builtins.str, None] =, maxsplit: builtins.int =) -> builtins.list[builtins.str]"
+    test: AttrOf[str, Literal['isdigit']]
+    reveal_type(test)  # N: Revealed type is "def () -> builtins.bool"
 
 
 - case: attr_of_attr
@@ -45,7 +45,7 @@
 
     class Test(object):
         def x(self, a: int) -> str:
-            ...
+            return 'a'
 
     test: AttrOf[Test, Literal['x']]
     reveal_type(test)  # N: Revealed type is "def (a: builtins.int) -> builtins.str"
@@ -60,7 +60,7 @@
     class Test(object):
         @classmethod
         def x(cls, a: int) -> str:
-            ...
+            return 'a'
 
     test: AttrOf[Test, Literal['x']]
     reveal_type(test)  # N: Revealed type is "def (a: builtins.int) -> builtins.str"
@@ -75,7 +75,7 @@
     class Test(object):
         @staticmethod
         def x(a: int) -> str:
-            ...
+            return 'a'
 
     test: AttrOf[Test, Literal['x']]
     reveal_type(test)  # N: Revealed type is "def (a: builtins.int) -> builtins.str"
@@ -86,7 +86,6 @@
   main: |
     from typing_extensions import Literal
     from mypy_extras import AttrOf
-
 
     class User(object):
         def auth(self, username: str, password: str) -> bool:
@@ -116,8 +115,8 @@
 
     x: User[int]
     y: User[str]
-    reveal_type(get_callback(x))  # N: Revealed type is "builtins.int*"
-    reveal_type(get_callback(y))  # N: Revealed type is "builtins.str*"
+    reveal_type(get_callback(x))  # N: Revealed type is "builtins.int"
+    reveal_type(get_callback(y))  # N: Revealed type is "builtins.str"
 
 
 - case: attr_of_generic_attr
@@ -134,5 +133,5 @@
 
     x: AttrOf[User[int], Literal['auth']]
     y: AttrOf[User[str], Literal['auth']]
-    reveal_type(x)  # N: Revealed type is "builtins.int*"
-    reveal_type(y)  # N: Revealed type is "builtins.str*"
+    reveal_type(x)  # N: Revealed type is "builtins.int"
+    reveal_type(y)  # N: Revealed type is "builtins.str"

@@ -35,7 +35,7 @@
 
     class Test(object):
         def x(self, a: int) -> str:
-            ...
+            return 'a'
 
     reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is "Literal['x']"
 
@@ -49,7 +49,7 @@
     class Test(object):
         @classmethod
         def x(cls, a: int) -> str:
-            ...
+            return 'a'
 
     reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is "Literal['x']"
 
@@ -63,7 +63,7 @@
     class Test(object):
         @staticmethod
         def x(a: int) -> str:
-            ...
+            return 'a'
 
     reveal_type(ensure_attr(Test, 'x'))  # N: Revealed type is "Literal['x']"
 
