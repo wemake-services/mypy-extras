@@ -1,19 +1,12 @@
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-
-[tool.nitpick]
-style = "https://raw.githubusercontent.com/wemake-services/wemake-python-styleguide/master/styles/nitpick-style-wemake.toml"
-
-
 [tool.poetry]
 name = "mypy-extras"
 description = "A collection of extra types and features for mypy"
 version = "0.1.0"
 license = "MIT"
 
-authors = []
+authors = [
+  "Nikita Sobolev <mail@sobolevn.me>",
+]
 
 readme = "README.md"
 
@@ -29,24 +22,39 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<3.9"
+python = ">=3.8.1,<4"
 
-[tool.poetry.dev-dependencies]
-mypy = "^0.910"
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.5"
 
-wemake-python-styleguide = "^0.15"
+wemake-python-styleguide = "^0.18"
 flake8-pytest-style = "^1.5"
-nitpick = "^0.27"
+nitpick = "^0.34"
+doc8 = "^1.1"
 
-safety = "^1.10"
+pytest = "^7.3"
+pytest-cov = "^4.0"
+pytest-randomly = "^3.12"
+pytest-mypy-plugins = "^3.0"
 
-pytest = "^6.2"
-pytest-cov = "^2.12"
-pytest-randomly = "^3.8"
-pytest-mypy-plugins = "^1.7"
 
-sphinx = "^4.1"
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = ">=6.2,<8.0"
 sphinx-autodoc-typehints = "^1.12"
-doc8 = "^0.9"
+sphinxcontrib-mermaid = "^0.9"
+added-value = "^0.24"
 m2r2 = "^0.3"
-tomlkit = "^0.7"
+tomli = "^2.0"
+
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.nitpick]
+style = "https://raw.githubusercontent.com/wemake-services/wemake-python-styleguide/master/styles/nitpick-style-wemake.toml"
