@@ -33,7 +33,7 @@ nitpick = ">=0.34,<0.36"
 doc8 = "^1.1"
 
 pytest = ">=7.3,<9.0"
-pytest-cov = "^4.0"
+pytest-cov = ">=4,<6"
 pytest-randomly = "^3.12"
 pytest-mypy-plugins = "^3.0"
 
